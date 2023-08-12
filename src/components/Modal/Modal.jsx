@@ -3,26 +3,23 @@ import css from './Modal.module.css'
 import PropTypes from "prop-types";
 
 const Modal=({largeImageURL,alt,onCloseModal})=>{
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      onCloseModal();
-    }
-  };
 
   const handleOverlayClick = event => {
     if (event.currentTarget === event.target) {
       onCloseModal();
     }
   };
-  
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        onCloseModal();
+      }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []
-  );
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [onCloseModal]);
 
     return(
         <div className={css["Overlay"]} onClick={handleOverlayClick}>
