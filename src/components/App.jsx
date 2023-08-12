@@ -24,7 +24,7 @@ const App=()=>{
       try {
         setIsLoading(true);
         const response =await httpRequest.fetchArticlesWithQuery(searchName,page);
-        setGallery([...gallery,...response.data.hits]);
+        setGallery(gallery=>[...gallery,...response.data.hits]);
         setTotalHits(response.data.totalHits);
          } catch (error) {
           setError(error.message);
